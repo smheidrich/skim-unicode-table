@@ -1,0 +1,2 @@
+include skim-fork/Cargo.toml
+recursive-include skim-fork/src *

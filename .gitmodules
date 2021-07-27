@@ -1,0 +1,3 @@
+[submodule "skim-fork"]
+	path = skim-fork
+	url = https://github.com/smheidrich/skim.git
