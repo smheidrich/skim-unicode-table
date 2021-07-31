@@ -26,7 +26,7 @@ setup(
       path="print-unicode-table/Cargo.toml", binding=Binding.Exec)
   ],
   package_data={
-    "skim_unicode_table": ["*.sh"]
+    "skim_unicode_table": ["*.sh", "render-glyph"]
   },
   # Rust binary definitely not zip safe, neither are shell scripts referring to
   # each other
