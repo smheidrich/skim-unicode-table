@@ -1,0 +1,14 @@
+[package]
+name = "print-unicode-table"
+version = "0.1.0"
+authors = ["smheidrich <smheidrich@weltenfunktion.de>"]
+edition = "2018"
+
+[dependencies]
+unic-char-range = "0.9"
+unic-emoji-char = "0.9"
+unic-ucd-category = "0.9"
+unic-ucd-name = "0.9"
+unic-ucd-name_aliases = "0.9"
+entities = "1.0"
+lazy_static = "1.3"
