@@ -24,7 +24,11 @@ setup(
       {"print-unicode-table": "skim_unicode_table.print-unicode-table"},
       path="print-unicode-table/Cargo.toml", binding=Binding.Exec)
   ],
-  # Rust binary definitely not zip safe:
+  package_data={
+    "skim_unicode_table": ["*.sh"]
+  },
+  # Rust binary definitely not zip safe, neither are shell scripts referring to
+  # each other
   zip_safe=False,
   # modules=[""],
   scripts=[],
@@ -33,6 +37,8 @@ setup(
     "setuptools_scm",
   ],
   install_requires=[
+    "cairocffi",
+    "pangocairocffi",
   ],
   tests_require=[
     "pytest",
