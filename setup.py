@@ -17,6 +17,7 @@ setup(
     "Operating System :: POSIX :: Linux",
     "Programming Language :: Python :: 3.6",
   ],
+  packages=["skim_unicode_table"],
   rust_extensions=[
     RustExtension({"sk": "skim_unicode_table.sk"},
       path="skim-fork/Cargo.toml", binding=Binding.Exec),
@@ -30,7 +31,6 @@ setup(
   # Rust binary definitely not zip safe, neither are shell scripts referring to
   # each other
   zip_safe=False,
-  # modules=[""],
   scripts=[],
   setup_requires=[
     "pytest-runner",
