@@ -48,14 +48,14 @@ jobs:
       run: |
         curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain stable -y
         export PATH="$HOME/.cargo/bin:$PATH"
-    - name: Install dependencies
+    - name: Install dependencies and build wheels
       run: |
-        export PYBIN=/opt/python/cp${{ matrix.pyver }}*/bin
-        "${PYBIN}/pip" install -U setuptools wheel setuptools-rust
-    - name: Build wheel
-      run: |
-        "${PYBIN}/python" setup.py bdist_wheel
-    - name: Audit wheel
+        # from: https://github.com/PyO3/setuptools-rust#build-wheelssh
+        for PYBIN in /opt/python/cp${{ matrix.pyver }}*/bin; do
+          "${PYBIN}/pip" install -U setuptools wheel setuptools-rust
+          "${PYBIN}/python" setup.py bdist_wheel
+        done
+    - name: Audit wheels
       run: |
         for whl in dist/*.whl; do
             auditwheel repair "$whl" -w dist/
