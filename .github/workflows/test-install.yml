@@ -40,9 +40,6 @@ jobs:
       matrix:
         pyver: [39]
     steps:
-    - name: cd /io
-      run: |
-        cd /io
     - name: Check out repo and submodule repos
       uses: actions/checkout@v2
       with:
