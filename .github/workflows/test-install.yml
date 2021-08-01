@@ -47,7 +47,7 @@ jobs:
     - name: Install Rust
       run: |
         curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain stable -y
-        export PATH="$HOME/.cargo/bin:$PATH"
+        echo "PATH=$HOME/.cargo/bin:$PATH" >> $GITHUB_ENV
     - name: Install dependencies and build wheels
       run: |
         # from: https://github.com/PyO3/setuptools-rust#build-wheelssh
