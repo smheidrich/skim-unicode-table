@@ -1,2 +1,4 @@
 include skim-fork/Cargo.toml
 recursive-include skim-fork/src *
+include print-unicode-table/Cargo.toml
+recursive-include print-unicode-table/src *
