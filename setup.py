@@ -31,7 +31,10 @@ setup(
   # Rust binary definitely not zip safe, neither are shell scripts referring to
   # each other
   zip_safe=False,
-  scripts=[],
+  scripts=[
+    "scripts/skim-unicode-table",
+    "scripts/skim-unicode-table-xsel",
+  ],
   setup_requires=[
     "pytest-runner",
     "setuptools_scm",
