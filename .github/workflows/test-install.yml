@@ -52,7 +52,7 @@ jobs:
         curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain stable -y
         export PATH="$HOME/.cargo/bin:$PATH"
     - name: Install dependencies
-    - run: |
+      run: |
         export PYBIN=/opt/python/cp${{ matrix.pyver }}*/bin
         "${PYBIN}/pip" install -U setuptools wheel setuptools-rust
     - name: Build wheel
