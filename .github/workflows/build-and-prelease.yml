@@ -54,7 +54,9 @@ jobs:
         done
     - name: Audit wheels
       run: |
-        for whl in dist/*.whl; do
+        mv dist dist_unaudited
+        mkdir dist
+        for whl in dist_unaudited/*.whl; do
             auditwheel repair "$whl" -w dist/
         done
     - name: Upload wheels as artifacts
