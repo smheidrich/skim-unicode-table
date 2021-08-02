@@ -39,9 +39,7 @@ jobs:
       with:
         path: skim-fork/target
         key: ${{ runner.os }}-build-${{ env.cache-name }}
-    - name: |
-        Set mtime of files in skim-fork repo to mtime from git history to allow
-        caching of entire build, not just dependencies
+    - name: Set mtime of files in skim-fork repo to mtime from git history
       run: |
         cd skim-fork;
         # from: https://serverfault.com/a/401450
