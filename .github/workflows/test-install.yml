@@ -44,10 +44,24 @@ jobs:
       uses: actions/checkout@v2
       with:
         submodules: recursive
+    - name: Cargo registry cache
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-cargo-registry
+      with:
+        path: ~/.cargo/registry
+        key: ${{ runner.os }}-build-${{ env.cache-name }}
     - name: Install Rust
       run: |
         curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain stable -y
         echo "PATH=$HOME/.cargo/bin:$PATH" >> $GITHUB_ENV
+    - name: Skim Rust build cache
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-skim-build
+      with:
+        path: skim-fork/target
+        key: ${{ runner.os }}-build-${{ env.cache-name }}
     - name: Install dependencies and build wheels
       run: |
         # from: https://github.com/PyO3/setuptools-rust#build-wheelssh
