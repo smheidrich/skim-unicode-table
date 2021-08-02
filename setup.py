@@ -2,20 +2,28 @@
 from setuptools import setup
 from setuptools_rust import Binding, RustExtension
 
+# read README contents for long_description
+from os import path
+this_directory = path.abspath(path.dirname(__file__))
+with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
+
 setup(
   name="skim-unicode-table",
   # version is handled dynamically by setuptools_scm
   use_scm_version = True,
-  description="Interactive unicode table using lotabout's skim",
-  keywords="",
-  url="",
+  description="Interactive fuzzy-searchable unicode table using lotabout/skim",
+  long_description=long_description,
+  long_description_content_type='text/markdown',
+  keywords=["unicode", "table", "interactive", "character", "fuzzy"],
+  url="https://github.com/smheidrich/skim-unicode-table",
   author="Shahriar Heidrich",
   author_email="smheidrich@weltenfunktion.de",
   classifiers=[
     "Development Status :: 3 - Alpha",
     "Environment :: Console",
     "Operating System :: POSIX :: Linux",
-    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.9",
   ],
   packages=["skim_unicode_table"],
   rust_extensions=[
