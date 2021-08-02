@@ -7,7 +7,7 @@ Can be used to quickly search for a character and copy it to the clipboard.
 
 ## Demo video
 
-TODO
+https://user-images.githubusercontent.com/3827982/127855578-b052bf0b-f4e5-4686-b171-5e5fea784326.mov
 
 
 ## Installation
@@ -21,6 +21,7 @@ compile skim from scratch.)
 ```bash
 pip install skim-unicode-table
 ```
+
 
 This will put two scripts into pip's preferred binary directory:
 `skim-unicode-table` and `skim-unicode-table-xsel`. The former just displays
