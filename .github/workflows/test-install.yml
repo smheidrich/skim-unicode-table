@@ -60,3 +60,9 @@ jobs:
         for whl in dist/*.whl; do
             auditwheel repair "$whl" -w dist/
         done
+    - name: Upload wheels as artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: wheels
+        path: |
+          dist
