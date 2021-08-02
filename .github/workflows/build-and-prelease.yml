@@ -1,9 +1,8 @@
-name: Build and release Python package
+name: Build and pre-release on GitHub
 
 on:
   push:
     branches: [ main ]
-    tag: [0-9][.]*
 
 jobs:
   build_and_release_wheels_x86_64:
@@ -64,15 +63,12 @@ jobs:
         name: wheels
         path: |
           dist
-    - name: Publish as GitHub release
+    - name: Publish as GitHub pre-release
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         automatic_release_tag: "latest"
+        prerelease: true
+        title: "Development Build"
         files: |
           dist/*.whl
-    - name: Publish to Test PyPI
-      uses: pypa/gh-action-pypi-publish@master
-      with:
-        password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-        repository_url: https://test.pypi.org/legacy/
