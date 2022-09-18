@@ -11,8 +11,6 @@ jobs:
       image: quay.io/pypa/manylinux_2_24_x86_64
     strategy:
       fail-fast: false
-      matrix:
-        pyver: [38,39,310]
     steps:
     - name: Check out repo and submodule repos
       uses: actions/checkout@v2
@@ -52,7 +50,7 @@ jobs:
     - name: Install dependencies and build wheels
       run: |
         # from: https://github.com/PyO3/setuptools-rust#build-wheelssh
-        for PYBIN in /opt/python/cp${{ matrix.pyver }}*/bin; do
+        for PYBIN in /opt/python/cp{37,38,39,310}*/bin; do
           "${PYBIN}/pip" install -U setuptools wheel setuptools-rust
           "${PYBIN}/python" setup.py bdist_wheel
         done
