@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        pyver: [39]
+        pyver: [38,39,310]
     steps:
     - name: Check out repo and submodule repos
       uses: actions/checkout@v2
