@@ -49,6 +49,7 @@ jobs:
           touch -d "$repo_time" "$filename";
         done
     - name: Install dependencies and build wheels
+      shell: bash  # no idea why this isn't default... should be
       run: |
         # from: https://github.com/PyO3/setuptools-rust#build-wheelssh
         for PYBIN in /opt/python/cp{37,38,39,310}*/bin; do
