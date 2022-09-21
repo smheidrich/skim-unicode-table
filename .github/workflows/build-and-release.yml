@@ -6,12 +6,16 @@ on:
     - "[0-9].*"
 
 jobs:
-  build_and_release_wheels_x86_64:
+  build_wheels_x86_64:
     runs-on: ubuntu-latest
-    container:
-      image: quay.io/pypa/manylinux_2_24_x86_64
     strategy:
       fail-fast: false
+      matrix:
+        image-name:
+          - manylinux2014
+          - manylinux_2_24
+    container:
+      image: quay.io/pypa/${{ matrix.image-name }}_x86_64
     steps:
     - name: Check out repo and submodule repos
       uses: actions/checkout@v2
@@ -72,9 +76,22 @@ jobs:
     - name: Upload wheels as artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: wheels
+        name: wheels-${{ matrix.image-name }}
         path: |
           dist
+  release_wheels_x86_64:
+    needs: build_wheels_x86_64
+    runs-on: ubuntu-latest
+    container:
+      image: quay.io/pypa/manylinux_2_24_x86_64
+    steps:
+    - name: Download all wheel artifacts
+      uses: actions/download-artifact@v3
+      with:
+        path: dist
+    - name: Move wheel artifacts
+      run: |
+        cd dist && mv */*.whl ./
     - name: Publish as GitHub release
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
