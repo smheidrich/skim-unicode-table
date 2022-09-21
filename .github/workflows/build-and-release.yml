@@ -9,16 +9,16 @@ jobs:
   build_and_release_wheels_x86_64:
     runs-on: ubuntu-latest
     container:
-      image: quay.io/pypa/manylinux_2_24_x86_64
+      image: quay.io/pypa/manylinux1_x86_64
     strategy:
       fail-fast: false
     steps:
     - name: Check out repo and submodule repos
-      uses: actions/checkout@v2
+      uses: actions/checkout@v1
       with:
         submodules: recursive
     - name: Cargo registry cache
-      uses: actions/cache@v2
+      uses: actions/cache@v1
       env:
         cache-name: cache-cargo-registry
       with:

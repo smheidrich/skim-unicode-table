@@ -1,19 +1,17 @@
 name: Build and pre-release on GitHub
 
-on:
-  push:
-    branches: [ main ]
+on: push
 
 jobs:
   build_and_release_wheels_x86_64:
     runs-on: ubuntu-latest
     container:
-      image: quay.io/pypa/manylinux_2_24_x86_64
+      image: quay.io/pypa/manylinux1_x86_64
     strategy:
       fail-fast: false
     steps:
     - name: Check out repo and submodule repos
-      uses: actions/checkout@v2
+      uses: actions/checkout@v1
       with:
         submodules: recursive
     - name: Cargo registry cache
