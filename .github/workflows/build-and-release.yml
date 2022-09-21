@@ -9,7 +9,7 @@ jobs:
   build_and_release_wheels_x86_64:
     runs-on: ubuntu-latest
     container:
-      image: quay.io/pypa/manylinux_2_24_x86_64
+      image: quay.io/pypa/manylinux1_x86_64
     strategy:
       fail-fast: false
     steps:
