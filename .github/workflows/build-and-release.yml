@@ -88,10 +88,11 @@ jobs:
     - name: Download all wheel artifacts
       uses: actions/download-artifact@v3
       with:
-        path: dist
+        path: downloaded
     - name: Move wheel artifacts
       run: |
-        cd dist && mv */*.whl ./
+        mkdir dist
+        mv downloaded/*/*.whl dist/
     - name: Publish as GitHub release
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
