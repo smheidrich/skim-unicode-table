@@ -1,16 +1,18 @@
 name: Build and pre-release on GitHub
 
-on:
-  push:
-    branches: [ main ]
+on: push
 
 jobs:
-  build_and_release_wheels_x86_64:
+  build_wheels_x86_64:
     runs-on: ubuntu-latest
-    container:
-      image: quay.io/pypa/manylinux_2_24_x86_64
     strategy:
       fail-fast: false
+      matrix:
+        image-name:
+          - manylinux2014_x86_64
+          - manylinux_2_24_x86_64
+    container:
+      image: quay.io/pypa/${{ matrix.image-name }}
     steps:
     - name: Check out repo and submodule repos
       uses: actions/checkout@v2
@@ -32,7 +34,7 @@ jobs:
     - name: Skim Rust build cache
       uses: actions/cache@v2
       env:
-        cache-name: cache-skim-build
+        cache-name: cache-skim-build-${{ matrix.image-name }}
       with:
         path: skim-fork/target
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('skim-fork/**/*') }}
@@ -66,14 +68,27 @@ jobs:
         mv dist dist_unaudited
         mkdir dist
         for whl in dist_unaudited/*.whl; do
-            auditwheel repair "$whl" -w dist/
+            auditwheel repair "$whl" --plat "${{ matrix.image-name }}" -w dist/
         done
     - name: Upload wheels as artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: wheels
+        name: wheels-${{ matrix.image-name }}
         path: |
           dist
+  pre_release_wheels_x86_64:
+    needs: build_wheels_x86_64
+    runs-on: ubuntu-latest
+    container:
+      image: quay.io/pypa/manylinux_2_24_x86_64
+    steps:
+    - name: Download all wheel artifacts
+      uses: actions/download-artifact@v3
+      with:
+        path: dist
+    - name: Move wheel artifacts
+      run: |
+        cd dist && mv */*.whl ./
     - name: Publish as GitHub pre-release
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
