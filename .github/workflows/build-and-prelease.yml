@@ -34,7 +34,7 @@ jobs:
     - name: Skim Rust build cache
       uses: actions/cache@v2
       env:
-        cache-name: cache-skim-build
+        cache-name: cache-skim-build-${{ matrix.image-name }}
       with:
         path: skim-fork/target
         key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('skim-fork/**/*') }}
