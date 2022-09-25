@@ -28,8 +28,7 @@ setup(
   packages=["skim_unicode_table"],
   rust_extensions=[
     RustExtension({"sk": "skim_unicode_table.sk"},
-      path="skim-fork/Cargo.toml", binding=Binding.Exec,
-      cargo_manifest_args=["+1.34"]),
+      path="skim-fork/Cargo.toml", binding=Binding.Exec),
     RustExtension(
       {"print-unicode-table": "skim_unicode_table.print-unicode-table"},
       path="print-unicode-table/Cargo.toml", binding=Binding.Exec)
