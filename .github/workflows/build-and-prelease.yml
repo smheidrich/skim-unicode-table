@@ -60,7 +60,7 @@ jobs:
           # required for git commands below:
           git config --global --add safe.directory /__w/skim-unicode-table/skim-unicode-table
           git status
-          "${PYBIN}/pip" install -U setuptools wheel setuptools-rust
+          "${PYBIN}/pip" install -U setuptools wheel setuptools-rust==0.10.6
           "${PYBIN}/python" setup.py bdist_wheel
           # required to get non-dev release ver:
           git reset --hard
